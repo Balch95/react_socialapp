@@ -2,21 +2,21 @@ import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
 
-function About() {
+function Login() {
     return (
       <>
         <main>
-          <h2>Who are we?</h2>
+          <h2>Login</h2>
           <p>
-            That feels like an existential question, don't you
-            think?
+            Login Page
           </p>
         </main>
         <nav>
-          <Link to="/">Home</Link>
+          <Link to="/"> Home</Link>
+          <Link to="/singup"> Singup</Link>
         </nav>
       </>
     );
   }
   
-  export default About;
+  export default Login;

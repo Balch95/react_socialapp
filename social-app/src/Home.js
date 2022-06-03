@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Routes, Route, Link } from "react-router-dom";
 import {useState, useEffect} from "react";
 
+import './Home.css';
+
 import PostList from "./PostList";
 
 
@@ -28,24 +30,36 @@ const Home = (props)=>{
           postData,
           axiosConfing)
         .then((res)=>{
-            setPost(()=>{
-              let newPostObj = {
-                id: res.data.id,
-                data: res.data.crated_at,
-                content: res.data.content,
-                user: res.data.user,
-              };
-            }); 
+            const post = res.data;
+            
+
+            let postObjAr = [];
+
+            for (const element of post) {
+              let postObj ={
+                id: element.id,
+                data: element.created_at,
+                content: element.content,
+                update: element.updated_at,
+                user: element.user.username,
+                avatar: element.user.avatar_url,
+              }
+              postObjAr.push(postObj);
+            }
+            console.log(postObjAr)
+            setPost(postObjAr); 
+
+
           })
         .catch((err)=>{
             console.log('Axios error', err);
           })
       };
-   
+      
 
     useEffect(()=>{
 
-      let timer = setInterval(()=>{postDown()}, 5000);
+      let timer = setInterval(()=>{postDown()}, 2000);
 
       return(()=>{
           clearInterval(timer);
@@ -55,7 +69,12 @@ const Home = (props)=>{
     
 
     return (
-        <div className="main-home">
+         <div className="main-home">
+          <nav>
+            <Link to="/login"> Login</Link>
+            <Link to="/singup"> Singup</Link>
+          </nav>
+            <h2>Post List: </h2>
             <PostList postList={postList}/>
         </div>
     );
