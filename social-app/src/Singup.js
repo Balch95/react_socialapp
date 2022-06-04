@@ -1,21 +1,56 @@
-import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
 
-function Singup (){
+import './Singup.css';
+
+const Singup =()=>{
+
+  const [username, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [passwordConfirm, setPasswordConfirm] = useState(null);
+
+  const setUserData = (e) =>{
+
+      const {id , value} = e.target;
+
+      if(id === "username"){
+          setUsername(value);
+      }
+      if(id === "email"){
+          setEmail(value);
+      }
+      if(id === "password"){
+          setPassword(value);
+      }
+      if(id === "passwordConfirm"){
+          setPasswordConfirm(value);
+      };
+  };
+
+  const submitClick = () =>{
+    let userDataObj={
+      username: username,
+      email: email,
+      password: password,
+    }
+    console.log(userDataObj);
+  };
 
     return(
-        <>
-        <main>
-          <h2>Singup</h2>
-          <p>
-            Singup Page
-          </p>
-        </main>
-        <nav>
-          <Link to="/"> Home</Link>
-          <Link to="/login"> Login</Link>
-        </nav>
-      </>
+        <div className="sing-up">
+          <h2>Zarejestruj się!</h2>
+          <form>
+            <label for='username'>Nazwa użytkownika: </label>
+            <input type="text" id="username" name="username" onChange = {(e) => setUserData(e)} required/>
+            <label for="email">Adres email: </label>
+            <input type="email" id="email" name="email" onChange = {(e) => setUserData(e)}  required/>
+            <label for='password'>Hasło: </label>
+            <input type="password" id="password" name="password" onChange = {(e) => setUserData(e)} required/>
+            <label for='passwordConfirm'>Powtórz hasło: </label>
+            <input type="password" id="passwordConfirm" name="passwordConfirm" onChange = {(e) => setUserData(e)} required/>
+            <button onClick={()=>submitClick()}>Zarejestruj</button>
+          </form>
+        </div>
     )
 }
 

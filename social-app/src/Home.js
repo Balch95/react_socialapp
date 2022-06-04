@@ -1,6 +1,5 @@
 import * as React from "react";
 import axios from 'axios';
-import { Routes, Route, Link } from "react-router-dom";
 import {useState, useEffect} from "react";
 
 import './Home.css';
@@ -46,10 +45,7 @@ const Home = (props)=>{
               }
               postObjAr.push(postObj);
             }
-            console.log(postObjAr)
             setPost(postObjAr); 
-
-
           })
         .catch((err)=>{
             console.log('Axios error', err);
@@ -70,10 +66,6 @@ const Home = (props)=>{
 
     return (
          <div className="main-home">
-          <nav>
-            <Link to="/login"> Login</Link>
-            <Link to="/singup"> Singup</Link>
-          </nav>
             <h2>Post List: </h2>
             <PostList postList={postList}/>
         </div>

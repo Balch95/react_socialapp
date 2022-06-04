@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+
 
 
 function Login() {
@@ -11,10 +11,6 @@ function Login() {
             Login Page
           </p>
         </main>
-        <nav>
-          <Link to="/"> Home</Link>
-          <Link to="/singup"> Singup</Link>
-        </nav>
       </>
     );
   }
