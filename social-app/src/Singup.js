@@ -28,17 +28,27 @@ const Singup =()=>{
   };
 
   const submitClick = () =>{
-    let userDataObj={
-      username: username,
-      email: email,
-      password: password,
+
+    let userDataObj = {};
+    let error = "";
+
+    if(passwordConfirm != password){
+      error = "Hasła nie są takie same"
+    }else{
+      userDataObj={
+        username: username,
+        email: email,
+        password: password,
+      }
     }
     console.log(userDataObj);
+    console.log(error);
   };
 
     return(
         <div className="sing-up">
           <h2>Zarejestruj się!</h2>
+
           <form>
             <label for='username'>Nazwa użytkownika: </label>
             <input type="text" id="username" name="username" onChange = {(e) => setUserData(e)} required/>
