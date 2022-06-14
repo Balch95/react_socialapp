@@ -1,0 +1,14 @@
+.nav-bar nav a{
+    padding: 5px;
+    margin: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: solid 1px gray;
+    border-radius: 15px;
+    color: rgb(59, 151, 255);
+} 
+
+.nav-bar nav a:hover{
+    background-color: rgb(224, 224, 224);
+}
