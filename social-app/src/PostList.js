@@ -1,5 +1,4 @@
 import React from "react";
-import {useState, useEffect} from "react";
 
 import './PostList.css';
 
@@ -33,7 +32,6 @@ function PostList (props){
     
 
   
-        console.log(props)
  
 
     return (

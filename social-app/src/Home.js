@@ -10,7 +10,7 @@ import PostList from "./PostList";
 const Home = (props)=>{
 
    const [postList, setPost] = useState([])
-   
+   const [lastPostDate, setLastPostDate] = useState();
 
     let postData ={
       username: "Jan",
@@ -47,30 +47,27 @@ const Home = (props)=>{
               postObjAr.push(postObj);
             }
             setPost(postObjAr); 
+            let lastPostDate = postObjAr[postObjAr.length - 1].data
+            setLastPostDate({
+              "date": lastPostDate
+            })
           })
         .catch((err)=>{
             console.log('Axios error', err);
-          })
+          });
       };
      
     const nextPost = () =>{
-      let lastPostDate = postList[postList.length - 1].data;
-      let sendData = {
-        "date": lastPostDate
-      }
-      console.log(sendData)
       axios.post(
         'https://akademia108.pl/api/social-app/post/older-then',
-        sendData,
+        lastPostDate,
         axiosConfing)
         .then((res)=>{
           const post = res.data;
             
 
-            let postObjAr = postList;
+            let postObjAr = [];
 
-           
-      console.log(postList)
 
             for (const element of post) {
               let postObj ={
@@ -83,8 +80,14 @@ const Home = (props)=>{
               }
               postObjAr.push(postObj);
             }
+            
+            postList.push(...postObjAr);
 
-            setPost(postObjAr); 
+
+            let lastPostDate = postObjAr[postObjAr.length - 1].data
+            setLastPostDate({
+              "date": lastPostDate
+            })
         })
 
         .catch((err)=>{
@@ -94,15 +97,13 @@ const Home = (props)=>{
         
     }  
 
+  
 
     useEffect(()=>{
-
-      postDown()
-      
-
+      postDown();
       }, []);
+   
 
-      console.log(postList)
     return (
          <div className="main-home">
             <h2>Post List: </h2>

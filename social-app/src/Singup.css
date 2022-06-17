@@ -29,3 +29,7 @@
     cursor: pointer;
     background-color: rgb(224, 224, 224);
 }
+
+.sing-up p.error{
+    color: red;
+}

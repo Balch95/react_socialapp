@@ -8,7 +8,8 @@ const Singup =()=>{
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [passwordConfirm, setPasswordConfirm] = useState(null);
-  const [validError, setError] = useState();
+  const [validError, setError] = useState(null);
+
 
   const setUserData = (e) =>{
 
@@ -16,17 +17,47 @@ const Singup =()=>{
       
 
       if(id === "username"){
-            setUsername(value);
+            if(value.length <= 4){
+              setError("Za krótki nick! Minimalna długość 4 znaki!");
+            }else{
+              if(/^[^\s]*$/.test(value)){
+                setUsername(value);
+                setError()
+              }else{
+                setError("Niedozwolona nazwa użytkownik! Zawiera puste znaki!");
+              }
+            }
       }
       if(id === "email"){
+        if(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)){
           setEmail(value);
+          setError()
+        }else{
+          setError("Niepoprawny format adresu e-mail!");
+        }
       }
       if(id === "password"){
-          setPassword(value);
+        if(value.length <= 6){
+          setError("Hasło musi zawierać minimum 6 znaków!")
+        }else{
+            if(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/.test(value) && /\d/.test(value)){
+              setPasswordConfirm(value);
+              setError()
+        }else{
+          setError("Hsło musi zawierać znak specjalny oraz cyfrę!")
+        } 
+        }
       }
       if(id === "passwordConfirm"){
-          setPasswordConfirm(value);
+        if(passwordConfirm === value){
+           setPassword(value);
+           setError()
+        }else{
+          setError("Hasła nie są takie same!")
+        }
       };
+
+     
   };
 
   const submitClick = () =>{
@@ -38,15 +69,21 @@ const Singup =()=>{
         email: email,
         password: password,
       }
-    
+
+    setUsername(null);
+    setEmail(null);
+    setPassword(null)
+    setPasswordConfirm(null)  
+
     console.log(userDataObj);
   
   };
 
+  console.log(validError)
     return(
         <div className="sing-up">
           <h2>Zarejestruj się!</h2>
-          <p>{validError}</p>
+          <p className="error">{validError}</p>
           <form>
             <label htmlFor='username'>Nazwa użytkownika: </label>
             <input type="text" id="username" name="username" onChange = {(e) => setUserData(e)} required/>
