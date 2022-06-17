@@ -5,10 +5,13 @@ import "./App.css";
 import NavBar from "./Nav";
 import Home from "./Home";
 import Login from "./Login";
-import Singup from "./Singup";
+import Signup from "./Signup";
 
 
 function App() {
+
+  const[user, setUser] = React.useState();
+
   return (
     <div className="App">
       <h1>Welcome to Social App</h1>
@@ -16,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
-        <Route path="singup" element={<Singup />}/>
+        <Route path="signup" element={<Signup user={user}/>}/>
       </Routes>
     </div>
   );

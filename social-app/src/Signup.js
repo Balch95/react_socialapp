@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import './Singup.css';
+import './Signup.css';
 
-const Singup =()=>{
+const Signup =()=>{
 
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
@@ -17,16 +17,16 @@ const Singup =()=>{
       
 
       if(id === "username"){
-            if(value.length <= 4){
-              setError("Za krótki nick! Minimalna długość 4 znaki!");
-            }else{
-              if(/^[^\s]*$/.test(value)){
-                setUsername(value);
-                setError()
-              }else{
-                setError("Niedozwolona nazwa użytkownik! Zawiera puste znaki!");
-              }
-            }
+        if(value.length <= 4){
+          setError("Za krótki nick! Minimalna długość 4 znaki!");
+        }else{
+          if(/^[^\s]*$/.test(value)){
+            setUsername(value);
+            setError()
+          }else{
+            setError("Niedozwolona nazwa użytkownik! Zawiera puste znaki!");
+          }
+        }      
       }
       if(id === "email"){
         if(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)){
@@ -62,9 +62,7 @@ const Singup =()=>{
 
   const submitClick = () =>{
 
-    let userDataObj = {};
-
-      userDataObj={
+     let userDataObj={
         username: username,
         email: email,
         password: password,
@@ -93,10 +91,10 @@ const Singup =()=>{
             <input type="password" id="password" name="password" onChange = {(e) => setUserData(e)} required/>
             <label htmlFor='passwordConfirm'>Powtórz hasło: </label>
             <input type="password" id="passwordConfirm" name="passwordConfirm" onChange = {(e) => setUserData(e)} required/>
-            <button onClick={()=>submitClick()}>Zarejestruj</button>
+            <button onSubmit={()=>submitClick()}>Zarejestruj</button>
           </form>
         </div>
     )
 }
 
-export default Singup;
+export default Signup;

@@ -29,28 +29,10 @@ const Home = (props)=>{
           'https://akademia108.pl/api/social-app/post/latest',
           postData,
           axiosConfing)
-        .then((res)=>{
-            const post = res.data;
+        .then((res)=>{  
+            setPost(res.data)   
+            setLastPostDate(res.data[res.data.length - 1].created_at)   
             
-
-            let postObjAr = [];
-
-            for (const element of post) {
-              let postObj ={
-                id: element.id,
-                data: element.created_at,
-                content: element.content,
-                update: element.updated_at,
-                user: element.user.username,
-                avatar: element.user.avatar_url,
-              }
-              postObjAr.push(postObj);
-            }
-            setPost(postObjAr); 
-            let lastPostDate = postObjAr[postObjAr.length - 1].data
-            setLastPostDate({
-              "date": lastPostDate
-            })
           })
         .catch((err)=>{
             console.log('Axios error', err);
@@ -60,36 +42,14 @@ const Home = (props)=>{
     const nextPost = () =>{
       axios.post(
         'https://akademia108.pl/api/social-app/post/older-then',
-        lastPostDate,
+        {
+          "date": lastPostDate
+        },
         axiosConfing)
         .then((res)=>{
-          const post = res.data;
-            
-
-            let postObjAr = [];
-
-
-            for (const element of post) {
-              let postObj ={
-                id: element.id,
-                data: element.created_at,
-                content: element.content,
-                update: element.updated_at,
-                user: element.user.username,
-                avatar: element.user.avatar_url,
-              }
-              postObjAr.push(postObj);
-            }
-            
-            postList.push(...postObjAr);
-
-
-            let lastPostDate = postObjAr[postObjAr.length - 1].data
-            setLastPostDate({
-              "date": lastPostDate
-            })
+          postList.push(...res.data)  
+          setLastPostDate(res.data[res.data.length - 1].created_at)   
         })
-
         .catch((err)=>{
           console.log(err);
         })
@@ -103,6 +63,7 @@ const Home = (props)=>{
       postDown();
       }, []);
    
+
 
     return (
          <div className="main-home">
