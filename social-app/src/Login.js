@@ -3,7 +3,7 @@ import {useState} from "react";
 import axios from 'axios';
 
 
-function Login() {
+function Login(props) {
 
   const [login, setLogin] = useState();
   const [password, setPassword] = useState();
@@ -34,20 +34,32 @@ function Login() {
       loginParamets,
     )
     .then((res)=>{
-      console.log(res);
-      setError(res.data)
+      
+      if(res.status === 201){
+        setError(res.data)
+        if(res.data.error === true){
+          setError({
+            "dataError":"Złe hasło lub login!"}
+            );
+        }
+      }
+      if(res.status ===200){
+        localStorage.setItem("login", JSON.stringify(res.data));
+        props.user(res.data);
+      }
+      console.log(res.data)
     })
     .catch((err)=>{
       console.log(err);
     })
-
+    
   }
 
 
     return (
       <div>
           <h2>Login</h2>
-          <p>{error.username} {error.password}</p>
+          <p>{error.username} {error.password} {error.dataError}</p>
           <form>
             <label htmlFor="username">Nazwa użytkownik: </label>
             <input type="text" id="username" name="username" onChange={(e)=>userData(e)} required/>
