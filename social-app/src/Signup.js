@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 import './Signup.css';
 
-const Signup =()=>{
+const Signup =(props)=>{
 
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
@@ -80,6 +81,7 @@ const Signup =()=>{
   console.log(validError)
     return(
         <div className="sing-up">
+          {props.user && (<Navigate to="/" replace={true} />)}
           <h2>Zarejestruj się!</h2>
           <p className="error">{validError}</p>
           <form>

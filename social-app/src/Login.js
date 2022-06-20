@@ -1,6 +1,7 @@
 import * as React from "react";
 import {useState} from "react";
 import axios from 'axios';
+import { Navigate } from "react-router-dom";
 
 
 function Login(props) {
@@ -21,7 +22,8 @@ function Login(props) {
     }
   };
 
-  const sendLoginData = () =>{
+  const sendLoginData = (event) =>{
+    event.preventDefault();
     let loginParamets={
       "username": login,
       "password": password,
@@ -43,8 +45,8 @@ function Login(props) {
         }
       }
       if(res.status ===200){
-        localStorage.setItem("login", JSON.stringify(res.data));
-        props.user(res.data);
+        localStorage.setItem("user", JSON.stringify(res.data));
+        props.setUser(res.data);
       }
       console.log(res.data)
     })
@@ -57,16 +59,16 @@ function Login(props) {
 
     return (
       <div>
+        {props.user && (<Navigate to="/" replace={true} />)}
           <h2>Login</h2>
           <p>{error.username} {error.password} {error.dataError}</p>
-          <form>
+          <form onSubmit={sendLoginData}>
             <label htmlFor="username">Nazwa użytkownik: </label>
             <input type="text" id="username" name="username" onChange={(e)=>userData(e)} required/>
             <label htmlFor="password">Hasło: </label>
             <input type="password" id="password" name="password" onChange={(e)=>userData(e)} required/>
-            <button onClick={sendLoginData}>Zaloguj</button>
+            <button>Zaloguj</button>
           </form>
-          <button onClick={sendLoginData}>Zaloguj</button>
       </div>
           
     )
