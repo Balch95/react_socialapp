@@ -21,7 +21,6 @@ function Login(props) {
     }
   };
 
-
   const sendLoginData = () =>{
     let loginParamets={
       "username": login,
