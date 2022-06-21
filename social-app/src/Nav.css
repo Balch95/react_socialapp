@@ -12,3 +12,10 @@
 .nav-bar nav a:hover{
     background-color: rgb(224, 224, 224);
 }
+
+.nav-bar nav ul{
+    list-style: none;
+}
+.nav-bar nav ul li{
+    display: inline;
+}

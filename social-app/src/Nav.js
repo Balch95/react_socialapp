@@ -28,10 +28,12 @@ const NavBar = (props) =>{
     return(
         <div className="nav-bar">
             <nav>
-                <Link to="/">Home</Link>
-                {!props.user&&<Link to="/login"> Login</Link>}
-                {!props.user&&<Link to="/signup"> Signup</Link>}
-                {props.user&&<Link to="/" onClick={logout}>Logout</Link>}
+                <ul>
+                    <li><Link to="/">Home</Link></li>
+                    <li>{!props.user&&<Link to="/login"> Login</Link>}</li>
+                    <li>{!props.user&&<Link to="/signup"> Signup</Link>}</li>
+                    <li>{props.user&&<Link to="/" onClick={logout}>Logout</Link>}</li>
+                </ul>
             </nav>
         </div>
     );

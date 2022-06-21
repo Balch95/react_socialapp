@@ -68,7 +68,7 @@ const Home = (props)=>{
     return (
          <div className="main-home">
             <h2>Post List: </h2>
-            <PostList postList={postList}/>
+            <PostList postList={postList} user={props.user}/>
             <button onClick={nextPost}>Pobierz</button>
         </div>
     );
