@@ -7,13 +7,14 @@ import './Home.css';
 import PostList from "./PostList";
 import AddPost from "./AddPost";
 import Follow from "./Follow";
-
+import FollowList from "./FollowList";
 
 const Home = (props)=>{
 
    const [postList, setPost] = useState([])
    const [lastPostDate, setLastPostDate] = useState();
    const [followList, setFollowList] = useState();
+   const [followAll, setFollowAll] = useState()
 
     let postData ={
       username: "Jan",
@@ -74,9 +75,23 @@ const Home = (props)=>{
   }
   
 
+  const followAllData = () =>{
+    axios.post(
+      "https://akademia108.pl/api/social-app/follows/allfollows"
+    )
+    .then((res)=>{
+      setFollowAll(res.data)
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  }
+
+
     useEffect(()=>{
       postDown();
       followRecommendations();
+      followAllData();
     }, [props.user]);
    
 
@@ -85,6 +100,7 @@ const Home = (props)=>{
          <div className="main-home">
             {props.user&&<AddPost user={props.user}/>}
             {props.user&&followList&&<Follow followList={followList}/>}
+            {props.user&&followAll&&<FollowList followAll={followAll}/>}
             <PostList postList={postList} user={props.user}/>
             <button onClick={nextPost}>Pobierz</button>
         </div>

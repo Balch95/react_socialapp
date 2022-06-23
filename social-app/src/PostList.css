@@ -4,6 +4,10 @@
     margin: 20px;
 }
 
+.post-list ul.post-ul{
+    padding: 0px;
+}
+
 .post-list ul.post-ul li div.like{
     font-size: 45px;   
 }

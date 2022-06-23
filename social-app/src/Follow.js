@@ -9,6 +9,7 @@ const Follow = (props) =>{
             <li key={obj.id}>    
                 <img src={obj.avatar_url} alt="avatar" />
                 <span className="follow-username">{obj.username}</span>
+                <button>Dodaj</button>
             </li>
         )
     })
@@ -17,7 +18,7 @@ const Follow = (props) =>{
 
     return(
         <div className="follow"> 
-            <h2>Follow List:</h2>
+            <h2>Obserwuj:</h2>
             <ul>
                {liFollow} 
             </ul>
