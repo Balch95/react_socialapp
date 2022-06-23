@@ -81,7 +81,7 @@ const Signup =(props)=>{
   console.log(validError)
     return(
         <div className="sing-up">
-          {props.user && (<Navigate to="/" replace={true} />)}
+          {props.user&&(<Navigate to="/" replace={true}/>)}
           <h2>Zarejestruj się!</h2>
           <p className="error">{validError}</p>
           <form>

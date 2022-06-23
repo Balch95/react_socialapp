@@ -1,0 +1,24 @@
+
+
+.follow ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.follow ul li{
+    border: 1px solid black;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.follow ul li img{
+    max-width: 100px;
+    max-height: 150px;
+}
+
+.follow ul li span{
+    display: inline-block;
+}

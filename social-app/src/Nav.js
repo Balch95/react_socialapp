@@ -16,7 +16,6 @@ const NavBar = (props) =>{
         .then((res)=>{
             localStorage.clear();
             props.setUser(null);
-            window.location.reload();
         })
         .catch((err)=>{
             console.log(err)

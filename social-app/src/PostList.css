@@ -21,6 +21,11 @@
     cursor: pointer;
 }
 
+.post-list ul.post-ul li div.like p{
+    font-size: 20px;
+    
+}
+
 
 .post-list ul.post-ul li{
     display: flex;

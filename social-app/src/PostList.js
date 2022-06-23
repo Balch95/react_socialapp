@@ -39,6 +39,29 @@ function PostList (props){
         })
     }
 
+    const setLikes = (post) =>{
+        let statusLike = false;
+        if(post.likes.length === 0){
+            statusLike = false;
+        }else{
+            if(post.likes.map(id=>id.id) === props.user.id){
+                statusLike = true;
+            }else{
+                statusLike = false;
+            }
+        }
+
+        if(!statusLike){
+            return(
+                <span className="thumb-up" onClick={(e)=>like(e, post.id)}>&#128077;</span>
+            )
+        }else{
+            return(
+                <span className="thumb-down" onClick={(e)=>dislike(e, post.id)}>&#128078;</span>
+            )
+        }
+        
+    }
 
     let liElements = props.postList.map((postObj)=>{
         return(
@@ -55,14 +78,15 @@ function PostList (props){
                 <span className="content">
                         Treść: {postObj.content};
                 </span>
-                <div className="like">
-                    {props.user&&<span className="thumb-up" onClick={(e)=>like(e, postObj.id)}>&#128077;</span>}
-                    {props.user&&<span className="thumb-down" onClick={(e)=>dislike(e, postObj.id)}>&#128078;</span>}
-                </div>
+                {props.user&&<div className="like">
+                        {setLikes(postObj)}
+                    <p className="like-value">Liczba polubień: {postObj.likes.length}</p>
+                </div>}
             </li>
         );
     });
        
+
 
     return (
         <div className="post-list">
