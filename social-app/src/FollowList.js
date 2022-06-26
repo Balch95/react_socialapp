@@ -1,16 +1,34 @@
+import axios from "axios";
 import React from "react";
 
 import './FollowList.css'
 
 const FollowList = (props) =>{
 
-    console.log(props.followAll)
+   
+
+    const deleteFollow = (event, id) =>{
+        event.preventDefault();
+        axios.post(
+            "https://akademia108.pl/api/social-app/follows/disfollow",
+            {
+                "leader_id": id
+            }
+        ).then((res)=>{
+            props.followAllData()
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
+
+
     let liFollowList = props.followAll.map((obj)=>{
         return(
             <li key={obj.id}>
             <img src={obj.avatar_url} alt="avatar" />
             <span>{obj.username}</span>
-            <button>Usuń</button>
+            <button onClick={(e)=>{deleteFollow(e, obj.id)}}>Usuń</button>
         </li>
         )
     })

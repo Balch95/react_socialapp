@@ -14,9 +14,11 @@ function PostList (props){
                 "post_id": postid,
             }
         )
-        .then((res)=>{
-            console.log('I like it!');
-            console.log(res);
+        .then(()=>{
+            let copyPosts = [...props.postList];
+            let objIndex = copyPosts.findIndex((obj) => obj.id === postid);
+            copyPosts[objIndex].likes.push(props.user);
+            props.setPost(copyPosts);
         })
         .catch((err)=>{
             console.log(err)
@@ -30,38 +32,61 @@ function PostList (props){
                 "post_id": postid,
             }
         )
+        .then(()=>{
+            let copyPosts = [...props.postList]
+            let objIndex = copyPosts.findIndex((obj => obj.id === postid));
+            copyPosts[objIndex].likes.pop(props.user)
+            console.log(copyPosts)
+            props.setPost(copyPosts)
+        })
+        .catch((err)=>{
+            console.log(err)
+        }) 
+    }
+
+    const delPost = (event, id) =>{
+        event.preventDefault()
+        axios.post(
+          "https://akademia108.pl/api/social-app/post/delete",
+          {
+            'post_id': id
+          }
+        )
         .then((res)=>{
-            console.log('I dislike it!');
-            console.log(res);
+            props.postDown()
         })
         .catch((err)=>{
             console.log(err)
         })
-    }
+      }
 
-    const setLikes = (post) =>{
-        let statusLike = false;
-        if(post.likes.length === 0){
-            statusLike = false;
-        }else{
-            if(post.likes.map(id=>id.id) === props.user.id){
-                statusLike = true;
-            }else{
-                statusLike = false;
-            }
-        }
 
-        if(!statusLike){
-            return(
-                <span className="thumb-up" onClick={(e)=>like(e, post.id)}>&#128077;</span>
-            )
-        }else{
-            return(
-                <span className="thumb-down" onClick={(e)=>dislike(e, post.id)}>&#128078;</span>
-            )
+
+    const delPostButton = (userid, postid) =>{
+        if(userid === props.user.id){
+            return (
+                <button onClick={(e)=>{delPost(e, postid)}}>Usuń post</button>
+            );
         }
-        
     }
+    
+    const setLikes = (post) => {
+
+
+        if (!post.likes.filter((post) => post.id === props.user.id).length) {
+          return (
+            <span className="thumb-up" onClick={(e) => like(e, post.id)}>
+              &#128077;
+            </span>
+          );
+        } else {
+          return (
+            <span className="thumb-down" onClick={(e) => dislike(e, post.id)}>
+              &#128078;
+            </span>
+          );
+        }
+      };
 
     let liElements = props.postList.map((postObj)=>{
         return(
@@ -79,6 +104,7 @@ function PostList (props){
                         Treść: {postObj.content};
                 </span>
                 {props.user&&<div className="like">
+                        {delPostButton(postObj.user.id, postObj.id)}
                         {setLikes(postObj)}
                     <p className="like-value">Liczba polubień: {postObj.likes.length}</p>
                 </div>}

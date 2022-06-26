@@ -16,6 +16,9 @@ const Home = (props)=>{
    const [followList, setFollowList] = useState();
    const [followAll, setFollowAll] = useState()
 
+
+   
+
     let postData ={
       username: "Jan",
       password: "password"
@@ -61,6 +64,8 @@ const Home = (props)=>{
         
     }  
 
+    
+
     const followRecommendations = () =>{
       axios.post(
           "https://akademia108.pl/api/social-app/follows/recommendations",
@@ -99,9 +104,10 @@ const Home = (props)=>{
     return (
          <div className="main-home">
             {props.user&&<AddPost user={props.user}/>}
-            {props.user&&followList&&<Follow followList={followList}/>}
-            {props.user&&followAll&&<FollowList followAll={followAll}/>}
-            <PostList postList={postList} user={props.user}/>
+            {props.user&&followList&&<Follow followList={followList} setFollowList={setFollowList} followRecommendations={followRecommendations}
+            followAllData={followAllData} postDown={postDown}/>}
+            {props.user&&followAll&&<FollowList followAll={followAll} followAllData={followAllData}/>}
+            <PostList postList={postList} user={props.user} setPost={setPost} postDown={postDown}/>
             <button onClick={nextPost}>Pobierz</button>
         </div>
     );
