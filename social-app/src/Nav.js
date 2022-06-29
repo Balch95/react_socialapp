@@ -30,8 +30,8 @@ const NavBar = (props) =>{
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li>{!props.user&&<Link to="/login"> Login</Link>}</li>
-                    <li>{!props.user&&<Link to="/signup"> Signup</Link>}</li>
-                    <li>{props.user&&<Link to="/" onClick={logout}>Logout</Link>}</li>
+                    <li>{!props.user&&<Link to="/signup"> Rejestracja</Link>}</li>
+                    <li>{props.user&&<Link to="/" onClick={logout}>Wyloguj</Link>}</li>
                 </ul>
             </nav>
         </div>

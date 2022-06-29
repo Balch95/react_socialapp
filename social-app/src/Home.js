@@ -8,6 +8,7 @@ import PostList from "./PostList";
 import AddPost from "./AddPost";
 import Follow from "./Follow";
 import FollowList from "./FollowList";
+import PopUpLogin from "./PopUpLogin";
 
 const Home = (props)=>{
 
@@ -93,21 +94,52 @@ const Home = (props)=>{
   }
 
 
+
+
+  const postDownInfo = document.querySelector('.down-post');
+
+  const options ={
+    rootMargin: "0px",
+    threshold: 0
+  }
+
+  const callback = (entries) => {
+    entries.forEach(entery => {
+      console.log(entery)
+      if(entery.isIntersecting){
+        nextPost()
+      }
+    });
+  }
+
+
+  
+  const observer = new IntersectionObserver(callback, options);
+
+ 
+
+  
+  if(postDownInfo) observer.observe(postDownInfo);
+
+
     useEffect(()=>{
       postDown();
       followRecommendations();
       followAllData();
+     
     }, [props.user]);
    
-
+  
 
     return (
          <div className="main-home">
+            {!props.user&&<PopUpLogin user={props.user} setUser={props.setUser}/>}
             {props.user&&<AddPost user={props.user}/>}
             {props.user&&followList&&<Follow followList={followList} setFollowList={setFollowList} followRecommendations={followRecommendations}
             followAllData={followAllData} postDown={postDown}/>}
             {props.user&&followAll&&<FollowList followAll={followAll} followAllData={followAllData}/>}
             <PostList postList={postList} user={props.user} setPost={setPost} postDown={postDown}/>
+            <h2 className="down-post">Pobieranie nowych postów ...</h2>
             <button onClick={nextPost}>Pobierz</button>
         </div>
     );

@@ -108,6 +108,7 @@ function PostList (props){
                         {setLikes(postObj)}
                     <p className="like-value">Liczba polubień: {postObj.likes.length}</p>
                 </div>}
+                { <p className="like-value">Liczba polubień: {postObj.likes.length}</p>}
             </li>
         );
     });
