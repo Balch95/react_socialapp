@@ -29,7 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home setUser={setUser} user={user}/>} />
         <Route path="login" element={<Login setUser={setUser} user={user}/>} />
-        <Route path="signup" element={<Signup user={user}/>}/>
+        <Route path="signup" element={<Signup user={user} setUser={setUser}/>}/>
       </Routes>
     </div>
   );

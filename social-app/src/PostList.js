@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-
+import moment from "moment";
 
 import './PostList.css';
 
@@ -95,18 +95,21 @@ function PostList (props){
                     <img src={postObj.user.avatar_url} alt="User avatar" />
                 </span>
                 <span className="user-name"> 
-                        Użytkownik: {postObj.user.username}
+                        {postObj.user.username}
                 </span>
                 <span className='post-data'>
-                        Data utwożenia: {postObj.created_at}
+                        Data utwożenia: {moment(postObj.created_at).format('YYYY-MM-DD')}
                 </span>
+                <span className='post-data'>
+                       Godzina: {moment(postObj.created_at).format('hh:mm')}
+                </span>
+                <h4>Post:</h4>
                 <span className="content">
-                        Treść: {postObj.content};
+                    {postObj.content};
                 </span>
                 {props.user&&<div className="like">
                         {delPostButton(postObj.user.id, postObj.id)}
                         {setLikes(postObj)}
-                    <p className="like-value">Liczba polubień: {postObj.likes.length}</p>
                 </div>}
                 { <p className="like-value">Liczba polubień: {postObj.likes.length}</p>}
             </li>

@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import './Signup.css';
+
+import Login from "./Login";
+
 
 const Signup =(props)=>{
 
@@ -10,7 +15,7 @@ const Signup =(props)=>{
   const [password, setPassword] = useState(null);
   const [passwordConfirm, setPasswordConfirm] = useState(null);
   const [validError, setError] = useState(null);
-
+  const [signedup, setSignedup] = useState(null)
 
   const setUserData = (e) =>{
 
@@ -61,7 +66,13 @@ const Signup =(props)=>{
      
   };
 
-  const submitClick = () =>{
+  const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+}
+
+  const submitClick = (e) =>{
+    e.preventDefault();
 
      let userDataObj={
         username: username,
@@ -69,22 +80,38 @@ const Signup =(props)=>{
         password: password,
       }
 
+      axios.post(
+        "http://akademia108.pl/api/social-app/user/signup",
+        JSON.stringify(userDataObj),
+        { 'headers': headers }
+      )
+      .then((res)=>{
+        if(res.data.signedup){
+          setSignedup(true)
+        }
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
     setUsername(null);
     setEmail(null);
     setPassword(null)
     setPasswordConfirm(null)  
-
-    console.log(userDataObj);
   
   };
 
-  console.log(validError)
+  
+
+
+
+
     return(
         <div className="sing-up">
           {props.user&&(<Navigate to="/" replace={true}/>)}
           <h2>Zarejestruj się!</h2>
           <p className="error">{validError}</p>
-          <form>
+          <form  onSubmit={(e)=>submitClick(e)}>
             <label htmlFor='username'>Nazwa użytkownika: </label>
             <input type="text" id="username" name="username" onChange = {(e) => setUserData(e)} required/>
             <label htmlFor="email">Adres email: </label>
@@ -93,8 +120,15 @@ const Signup =(props)=>{
             <input type="password" id="password" name="password" onChange = {(e) => setUserData(e)} required/>
             <label htmlFor='passwordConfirm'>Powtórz hasło: </label>
             <input type="password" id="passwordConfirm" name="passwordConfirm" onChange = {(e) => setUserData(e)} required/>
-            <button onSubmit={()=>submitClick()}>Zarejestruj</button>
+            <button>Zarejestruj</button>
           </form>
+          {signedup&&
+          <div className="ya-back">
+            <div className="ya-signup">
+            <h2>Zostałeś zarejestrowamy!</h2>
+            <Login setUser={props.setUser} user={props.user}/>
+            </div>
+          </div>}
         </div>
     )
 }
