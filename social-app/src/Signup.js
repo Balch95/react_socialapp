@@ -66,11 +66,7 @@ const Signup =(props)=>{
      
   };
 
-  const headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-}
-
+  
   const submitClick = (e) =>{
     e.preventDefault();
 
@@ -79,6 +75,11 @@ const Signup =(props)=>{
         email: email,
         password: password,
       }
+      
+      const headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
 
       axios.post(
         "http://akademia108.pl/api/social-app/user/signup",

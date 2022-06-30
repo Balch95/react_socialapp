@@ -25,10 +25,6 @@ const Follow = (props) =>{
     }
 
 
-
-
-
-
     let liFollow = props.followList.map((obj)=>{
         return(
             <li key={obj.id}>    

@@ -25,7 +25,7 @@ const FollowList = (props) =>{
 
     let liFollowList = props.followAll.map((obj)=>{
         return(
-            <li key={obj.id}>
+        <li key={obj.id}>
             <img src={obj.avatar_url} alt="avatar" />
             <span>{obj.username}</span>
             <button onClick={(e)=>{deleteFollow(e, obj.id)}}>Usuń</button>

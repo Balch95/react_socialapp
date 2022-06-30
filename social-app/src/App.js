@@ -16,11 +16,6 @@ function App() {
 
   axios.defaults.headers.common['Authorization'] = "Bearer " + (user ? user.jwt_token : "");
 
-  
-
-  console.log(user)
-
-
 
   return (
     <div className="App">
