@@ -9,12 +9,11 @@
 .main-home button{
     max-width: 100px;
     background-color: #fff;
-    margin: 15px;
-    padding: 10px;
+    padding: 9px;
     text-transform: uppercase;
     font-weight: 700;
     border: solid 1px gray;
-    border-radius: 15px;
+    border-radius: 9px;
     color: rgb(59, 151, 255);
 }
 

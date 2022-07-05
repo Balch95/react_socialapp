@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Routes, Route} from "react-router-dom";
-import "./App.css";
 import { useState } from "react";
 import axios from "axios";
 
@@ -9,6 +8,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
 
+import "./App.css";
 
 function App() {
 

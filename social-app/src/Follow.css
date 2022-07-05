@@ -34,11 +34,11 @@
 .follow ul li button{
     background-color: #fff;
     margin: 5px;
-    padding: 5px;
+    padding: 9px;
     text-transform: uppercase;
     font-weight: 700;
     border: solid 1px gray;
-    border-radius: 15px;
+    border-radius: 9px;
     color: rgb(59, 151, 255);
 }
 

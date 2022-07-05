@@ -13,7 +13,7 @@
 }
 
 .sing-up form input{
-    margin: 10px;
+    margin: 5px;
     padding: 5px;
 }
 
@@ -22,7 +22,8 @@
     color: rgb(59, 151, 255);
     font-weight: 600;
     border: solid 1px black;
-    border-radius: 15px;
+    border-radius: 9px;
+    padding: 9px;
 }
 
 .sing-up form button:hover{
